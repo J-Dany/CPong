@@ -3,6 +3,7 @@ The famous game "Pong" written with Gtk+ and OpenGL
 
 ## Compile
 ```bash
+$ cd src
 $ make
 ```
 
