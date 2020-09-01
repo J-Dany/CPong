@@ -1,15 +1,28 @@
-#include <stdio.h>
-#include <gtk-3.0/gtk/gtk.h>
+#include <gtk/gtk.h>
+
+static void print_hello (GtkWidget *widget, gpointer   data)
+{
+  g_print ("Hello World\n");
+}
 
 static void on_activate (GtkApplication *app) 
 {
-    // Create a new window
-    GtkWidget *window = gtk_application_window_new (app);
-    // Create a new button
-    GtkWidget *button = gtk_button_new_with_label ("Hello, World!");
-    // When the button is clicked, close the window passed as an argument
+    GtkWidget *window;
+    GtkWidget *button;
+    GtkWidget *button_box;
+
+    window = gtk_application_window_new (app);
+    gtk_window_set_title (GTK_WINDOW (window), "Window");
+    gtk_window_set_default_size (GTK_WINDOW (window), 200, 200);
+
+    button_box = gtk_button_box_new (GTK_ORIENTATION_HORIZONTAL);
+    gtk_container_add (GTK_CONTAINER (window), button_box);
+
+    button = gtk_button_new_with_label ("Hello World");
+    g_signal_connect (button, "clicked", G_CALLBACK (print_hello), NULL);
     g_signal_connect_swapped (button, "clicked", G_CALLBACK (gtk_window_close), window);
-    gtk_container_add (GTK_CONTAINER (window), button);
+    gtk_container_add (GTK_CONTAINER (button_box), button);
+
     gtk_widget_show_all (window);
 }
 
