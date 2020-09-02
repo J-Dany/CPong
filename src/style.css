@@ -1,0 +1,32 @@
+button
+{
+    opacity: 1;
+    border-image: none none none none none;
+}
+
+button label
+{
+    background-image: none;
+    border-image: none;
+    color: white;
+    background-color: black;
+    font-size: xx-large;
+}
+
+button:hover label
+{
+    background-image: none;
+    border-image: none;
+    color: red;
+    font-size: 32px;
+    font-weight: bolder;
+}
+
+button:active label
+{
+    background-image: none;
+    border-image: none;
+    color: white;
+    font-size: 32px;
+    font-weight: bolder;
+}
