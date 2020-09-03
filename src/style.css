@@ -7,6 +7,7 @@ button
 {
     background-color: black;
     margin-bottom: 24px;
+    margin-right: 64px;
     border-radius: 16px;
     border-top-color: blue;
     border-bottom-color: blue;
@@ -17,7 +18,7 @@ button
 button label
 {
     letter-spacing: 16px;
-    font-family: monospace;
+    font-family: fantasy;
     color: white;
     background-color: transparent;
     font-size: 64px;

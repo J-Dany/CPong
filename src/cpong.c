@@ -30,6 +30,7 @@ static void on_activate (GtkApplication *app)
     gtk_widget_set_name(buttons_box, "buttons_box");
     gtk_container_add (GTK_CONTAINER (window), buttons_box);
     gtk_widget_set_valign(buttons_box, GTK_ALIGN_CENTER);
+    gtk_widget_set_halign(buttons_box, GTK_ALIGN_CENTER);
 
     button_play = gtk_button_new_with_label ("PLAY");
     gtk_widget_set_size_request(button_play, 350, 135);
