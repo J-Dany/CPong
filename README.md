@@ -5,7 +5,7 @@ The famous game "Pong" written with Gtk+ and OpenGL.
 You can get precompiled version of this program [here]().
 
 ## Compile
-### CHECK DEPENDECIES BEFORE COMPILE.
+#### CHECK DEPENDECIES BEFORE COMPILE.
 I provided a simple 'compile' file for _Linux_. For _Windows 10_ and _macOS_ should be the same command. 
 Anyway, the file is _executable_, so, if you are on Linux, you can type:
 ```bash
