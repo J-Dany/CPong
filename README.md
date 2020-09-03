@@ -1,9 +1,6 @@
 # CPong
 The famous game "Pong" written with Gtk+ and OpenGL.
 
-## How to play
-You can get precompiled version of this program [here]().
-
 ## Compile
 
 #### CHECK DEPENDECIES BEFORE COMPILE.
