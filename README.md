@@ -7,5 +7,11 @@ $ cd src
 $ ./compile
 ```
 
+## Dependecies
+Here a list of dependecies for os:
+- Windows
+- Linux
+- MacOS
+
 #### Version
 1.3.1
