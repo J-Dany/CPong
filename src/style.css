@@ -5,10 +5,11 @@ window
 
 button
 {
+    background-image: none;
     background-color: black;
     margin-bottom: 24px;
     margin-right: 64px;
-    border-radius: 16px;
+    border-radius: 12px;
     border-top-color: rgb(56, 56, 235);
     border-bottom-color: rgb(56, 56, 235);
     border-right-color: rgb(56, 56, 235);
