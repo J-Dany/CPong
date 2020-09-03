@@ -1,4 +1,5 @@
 #include <gtk/gtk.h>
+#include <GL/gl.h>
 
 GtkCssProvider *_css_provider = NULL;
 GdkDisplay *_display = NULL;
@@ -6,8 +7,10 @@ GdkScreen *_screen = NULL;
 
 static void render(GtkGLArea *gl_area)
 {
-    printf("%s\n", "Render");
-    fflush(stdout);
+    gtk_gl_area_make_current (gl_area);
+    
+    glClearColor (0, 0, 0, 1);
+    glClear (GL_COLOR_BUFFER_BIT);
 }
 
 static void play(GtkButton *main_button, gpointer main_window)
