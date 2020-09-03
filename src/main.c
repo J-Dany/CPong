@@ -3,7 +3,6 @@
 #include <string.h>
 #include <gtk/gtk.h>
 
-
 static void on_activate (GtkApplication *app) 
 {
     GtkWidget *window;
@@ -17,22 +16,13 @@ static void on_activate (GtkApplication *app)
     gtk_style_context_add_provider_for_screen(
         gdk_display_get_default_screen (gdk_display_get_default()),
         GTK_STYLE_PROVIDER(css_provider),
-        GTK_STYLE_PROVIDER_PRIORITY_THEME
+        GTK_STYLE_PROVIDER_PRIORITY_USER
     );
 
     window = gtk_application_window_new(app);
     gtk_widget_set_name(GTK_WIDGET(window), "main_window");
     gtk_window_set_title(GTK_WINDOW(window), "CPong");
     gtk_window_set_default_size (GTK_WINDOW (window), 1280, 720);
-    
-    GdkRGBA color = 
-    {
-        .alpha =   0,
-        .blue  = 1.0,
-        .green = 1.0,
-        .red   = 1.0
-    };
-    gtk_widget_override_background_color(GTK_WIDGET(window), GTK_WINDOW_TOPLEVEL, &color);
 
     buttons_box = gtk_button_box_new (GTK_ORIENTATION_VERTICAL);
     gtk_widget_set_name(buttons_box, "buttons_box");
@@ -43,7 +33,6 @@ static void on_activate (GtkApplication *app)
     gtk_widget_set_size_request(button_play, 350, 150);
     gtk_container_add (GTK_CONTAINER (buttons_box), button_play);
     gtk_button_set_relief(GTK_BUTTON(button_play), GTK_RELIEF_NONE);
-    gtk_widget_set_opacity(GTK_WIDGET(button_play), 1);
 
     button_quit = gtk_button_new_with_label("Quit");
     gtk_widget_set_size_request(button_quit, 350, 150);
