@@ -22,7 +22,7 @@ Here a list of dependecies for O.S.:
     - Driver OpenGL for [Intel](https://01.org/linuxgraphics)
     - Driver OpenGL for [NVIDIA](http://www.nvidia.com/object/unix.html)
 
-For **macOS** users, you don't need to download anything, because OpenGL is included in the system.
+For **macOS** users, you don't need to download anything, because OpenGL is include in the system.
 
 All these informations comes from [khronos.org](https://www.khronos.org/opengl/wiki/Getting_Started), so if you want more information visit this site. 
 
