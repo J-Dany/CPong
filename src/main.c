@@ -24,6 +24,7 @@ static void on_activate (GtkApplication *app)
     gtk_widget_set_name(GTK_WIDGET(window), "main_window");
     gtk_window_set_title(GTK_WINDOW(window), "CPong");
     gtk_window_set_default_size (GTK_WINDOW (window), 1280, 720);
+    
     GdkRGBA color = 
     {
         .alpha =   0,
