@@ -1,16 +1,37 @@
 #include <gtk/gtk.h>
 #include <GL/gl.h>
+#include <GL/glut.h>
+#include <GL/glu.h>
 
 GtkCssProvider *_css_provider = NULL;
 GdkDisplay *_display = NULL;
 GdkScreen *_screen = NULL;
 
-static void render(GtkGLArea *gl_area)
+void display(void)
 {
-    gtk_gl_area_make_current (gl_area);
-    
-    glClearColor (0, 0, 0, 1);
+    /* clear all pixels */
     glClear (GL_COLOR_BUFFER_BIT);
+    /* draw white polygon (rectangle) with corners at
+    * (0.25, 0.25, 0.0) and (0.75, 0.75, 0.0)
+    */
+    glColor3f (1.0, 0.25, 1.0);
+    glBegin(GL_POLYGON);
+    glVertex3f (0.25, 0.25, 0.0);
+    glVertex3f (0.75, 0.25, 0.0);
+    glVertex3f (0.75, 0.75, 0.0);
+    glVertex3f (0.25, 0.75, 0.0);
+    glEnd();
+    /* don't wait!
+    * start processing buffered OpenGL routines
+    */
+    glFlush ();
+}
+
+static void render(GtkGLArea *gl_area)
+{    
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+
+    glutDisplayFunc(display);
 }
 
 static void play(GtkButton *main_button, gpointer main_window)
@@ -86,6 +107,7 @@ static void on_activate (GtkApplication *app)
 
 int main(int argc, char *argv[])
 {
+    glutInit(&argc, argv);
     GtkApplication *a = gtk_application_new ("com.example.GtkApplication", G_APPLICATION_FLAGS_NONE);
     g_signal_connect (a, "activate", G_CALLBACK (on_activate), NULL);
 
