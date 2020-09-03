@@ -9,18 +9,22 @@ $ ./compile
 
 ## Dependecies
 If you want to download and work by yourself, you need some stuff.
-Here a list of dependecies for os:
+Here a list of dependecies for O.S.:
 
-- Windows
+- **Windows**
   - [Gtk+3.0](https://www.gtk.org/docs/installations/windows/) or newer & OpenGL
     - Driver OpenGL for [NVIDIA](https://www.nvidia.com/Download/index.aspx)
     - Driver OpenGL for [AMD](https://www.amd.com/en/support)
     - Driver OpenGL for [Intel](https://downloadcenter.intel.com/)
-- Linux
-  - [Gtk+3.0](https://www.gtk.org/docs/installations/linux/) or newer & OpenGl
+- **Linux**
+  - [Gtk+3.0](https://www.gtk.org/docs/installations/linux/) or newer & OpenGL
     - Driver OpenGL for [AMD](http://support.amd.com/en-us/download/linux)
     - Driver OpenGL for [Intel](https://01.org/linuxgraphics)
     - Driver OpenGL for [NVIDIA](http://www.nvidia.com/object/unix.html)
+
+For **macOS** users, you don't need to download anything, because OpenGL is included in the system.
+
+All these informations comes from [khronos.org](https://www.khronos.org/opengl/wiki/Getting_Started), so if you want more information visit this site. 
 
 #### Version
 1.3.1
