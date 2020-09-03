@@ -24,7 +24,7 @@ Here a list of dependecies for O.S.:
 
 For **macOS** users, you don't need to download anything, because OpenGL is include in the system.
 
-All these informations comes from [khronos.org](https://www.khronos.org/opengl/wiki/Getting_Started), so if you want more information visit this site. 
+All these informations come from [khronos.org](https://www.khronos.org/opengl/wiki/Getting_Started), so if you want more information visit this site. 
 
 ## Version
 Current version is **1.3.1**.
