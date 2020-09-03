@@ -9,10 +9,10 @@ button
     margin-bottom: 24px;
     margin-right: 64px;
     border-radius: 16px;
-    border-top-color: blue;
-    border-bottom-color: blue;
-    border-right-color: blue;
-    border-left-color: blue;
+    border-top-color: rgb(56, 56, 235);
+    border-bottom-color: rgb(56, 56, 235);
+    border-right-color: rgb(56, 56, 235);
+    border-left-color: rgb(56, 56, 235);
 }
 
 button label

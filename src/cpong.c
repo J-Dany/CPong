@@ -1,7 +1,35 @@
-#include <stdlib.h>
-#include <malloc.h>
-#include <string.h>
 #include <gtk/gtk.h>
+
+GtkCssProvider *_css_provider = NULL;
+GdkDisplay *_display = NULL;
+GdkScreen *_screen = NULL;
+
+static void render(GtkGLArea *gl_area)
+{
+    printf("%s\n", "Render");
+    fflush(stdout);
+}
+
+static void play(GtkButton *main_button, gpointer main_window)
+{
+    GList *children, *iter;
+
+    children = gtk_container_get_children(GTK_CONTAINER(main_window));
+    for(iter = children; iter != NULL; iter = g_list_next(iter))
+    {
+        gtk_container_remove(main_window, GTK_WIDGET(iter->data));
+    }
+
+    g_list_free(children);
+
+    gtk_style_context_remove_provider_for_screen(_screen, GTK_STYLE_PROVIDER(_css_provider));
+
+    GtkWidget *gl_area = gtk_gl_area_new();
+    g_signal_connect(gl_area, "render", G_CALLBACK(render), NULL);
+    gtk_container_add(GTK_CONTAINER(main_window), gl_area);
+
+    gtk_widget_show_all (GTK_WIDGET(main_window));
+}
 
 static void on_activate (GtkApplication *app) 
 {
@@ -12,6 +40,10 @@ static void on_activate (GtkApplication *app)
     GtkCssProvider *css_provider = gtk_css_provider_new();
     GdkDisplay *display = gdk_display_get_default();
     GdkScreen *screen = gdk_display_get_default_screen (display);
+
+    _css_provider = css_provider;
+    _display = display;
+    _screen = screen;
 
     gtk_css_provider_load_from_path(css_provider, "style.css", NULL);
 
@@ -34,6 +66,7 @@ static void on_activate (GtkApplication *app)
 
     button_play = gtk_button_new_with_label ("PLAY");
     gtk_widget_set_size_request(button_play, 350, 135);
+    g_signal_connect(button_play, "clicked", G_CALLBACK(play), (gpointer) window);
     gtk_container_add (GTK_CONTAINER (buttons_box), button_play);
     gtk_button_set_relief(GTK_BUTTON(button_play), GTK_RELIEF_NONE);
 
@@ -50,8 +83,8 @@ static void on_activate (GtkApplication *app)
 
 int main(int argc, char *argv[])
 {
-    GtkApplication *app = gtk_application_new ("com.example.GtkApplication", G_APPLICATION_FLAGS_NONE);
-    g_signal_connect (app, "activate", G_CALLBACK (on_activate), NULL);
+    GtkApplication *a = gtk_application_new ("com.example.GtkApplication", G_APPLICATION_FLAGS_NONE);
+    g_signal_connect (a, "activate", G_CALLBACK (on_activate), NULL);
 
-    return g_application_run (G_APPLICATION (app), argc, argv);
+    return g_application_run (G_APPLICATION (a), argc, argv);
 }
