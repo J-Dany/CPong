@@ -1,37 +1,71 @@
+#include <math.h>
 #include <gtk/gtk.h>
-#include <GL/gl.h>
-#include <GL/glut.h>
-#include <GL/glu.h>
+#include <epoxy/gl.h>
 
-GtkCssProvider *_css_provider = NULL;
-GdkDisplay *_display = NULL;
-GdkScreen *_screen = NULL;
+static GtkCssProvider *_css_provider = NULL;
+static GdkDisplay *_display = NULL;
+static GdkScreen *_screen = NULL;
 
-void display(void)
+/* The object we are drawing */
+static const GLfloat vertex_data[] = 
 {
-    /* clear all pixels */
-    glClear (GL_COLOR_BUFFER_BIT);
-    /* draw white polygon (rectangle) with corners at
-    * (0.25, 0.25, 0.0) and (0.75, 0.75, 0.0)
-    */
-    glColor3f (1.0, 0.25, 1.0);
-    glBegin(GL_POLYGON);
-    glVertex3f (0.25, 0.25, 0.0);
-    glVertex3f (0.75, 0.25, 0.0);
-    glVertex3f (0.75, 0.75, 0.0);
-    glVertex3f (0.25, 0.75, 0.0);
-    glEnd();
-    /* don't wait!
-    * start processing buffered OpenGL routines
-    */
-    glFlush ();
+  0.f,   0.5f,   0.f, 1.f,
+  0.5f, -0.366f, 0.f, 1.f,
+ -0.5f, -0.366f, 0.f, 1.f,
+};
+
+static void init_buffers(GLuint *vao_out, GLuint *buff_out)
+{
+    //////////////////////////////////////////////////////////////////////////////
+    // https://gitlab.gnome.org/GNOME/gtk/-/blob/master/demos/gtk-demo/glarea.c //
+    //                                                                          //
+    //////////////////////////////////////////////////////////////////////////////
+
+    GLuint vao, buff;
+
+    glGenVertexArrays (1, &vao);
+    glBindVertexArray (vao);
+
+    glGenBuffers (1, &buff);
+    glBindBuffer (GL_ARRAY_BUFFER, buff);
+    glBufferData (GL_ARRAY_BUFFER, sizeof (vertex_data), vertex_data, GL_STATIC_DRAW);
+    glBindBuffer (GL_ARRAY_BUFFER, 0);
+
+    if (vao_out != NULL)
+    {
+        *vao_out = vao;
+    }
+
+    if (buff_out != NULL)
+    {
+        *buff_out = buff;
+    }
+}
+
+static void unrealize(GtkWidget *gl_area)
+{
+    
+}
+
+static GLuint position_buffer;
+
+static void realize(GtkWidget *gl_area)
+{
+    GdkGLContext *context;
+    gtk_gl_area_make_current (GTK_GL_AREA (gl_area));
+    if (gtk_gl_area_get_error (GTK_GL_AREA (gl_area)) != NULL)
+        return;
+    context = gtk_gl_area_get_context (GTK_GL_AREA (gl_area));
+
+    init_buffers(&position_buffer, NULL);
 }
 
 static void render(GtkGLArea *gl_area)
 {    
-    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-
-    glutDisplayFunc(display);
+    /////////////////////////////////////////////////
+    // https://www.youtube.com/watch?v=Q_kFcRlLTk0 //
+    //                                             //
+    /////////////////////////////////////////////////
 }
 
 static void play(GtkButton *main_button, gpointer main_window)
@@ -49,6 +83,7 @@ static void play(GtkButton *main_button, gpointer main_window)
     gtk_style_context_remove_provider_for_screen(_screen, GTK_STYLE_PROVIDER(_css_provider));
 
     GtkWidget *gl_area = gtk_gl_area_new();
+    g_signal_connect(gl_area, "realize", G_CALLBACK(realize), NULL);
     g_signal_connect(gl_area, "render", G_CALLBACK(render), NULL);
     gtk_container_add(GTK_CONTAINER(main_window), gl_area);
 
@@ -107,9 +142,8 @@ static void on_activate (GtkApplication *app)
 
 int main(int argc, char *argv[])
 {
-    glutInit(&argc, argv);
-    GtkApplication *a = gtk_application_new ("com.example.GtkApplication", G_APPLICATION_FLAGS_NONE);
-    g_signal_connect (a, "activate", G_CALLBACK (on_activate), NULL);
+    GtkApplication *app = gtk_application_new ("com.example.GtkApplication", G_APPLICATION_FLAGS_NONE);
+    g_signal_connect (app, "activate", G_CALLBACK (on_activate), NULL);
 
-    return g_application_run (G_APPLICATION (a), argc, argv);
+    return g_application_run (G_APPLICATION (app), argc, argv);
 }
